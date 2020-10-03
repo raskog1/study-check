@@ -1,41 +1,20 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import {
-  MDBInput,
-  MDBNavbar,
-  MDBNavbarNav,
-  MDBNavItem,
-  MDBNavLink,
-  MDBDropdown,
-  MDBDropdownToggle,
-  MDBDropdownMenu,
-  MDBDropdownItem,
-  MDBIcon,
-  MDBSideNavItem,
-  MDBSideNavCat,
-  MDBSideNavNav,
-  MDBSideNav,
-  MDBContainer,
-  MDBRow,
-  MDBCol,
-  MDBBtn,
-} from "mdbreact";
+import { MDBInput, MDBContainer, MDBRow, MDBCol, MDBBtn } from "mdbreact";
 import UserContext from "../../utils/UserContext";
 import "./style.css";
 
 const Profile = ({}) => {
   const { user, setUser } = React.useContext(UserContext);
   const [formData, setFormData] = useState({
-    facebook: "",
-    pinterest: "",
-    github: "",
-    twitter: "",
+    facebook: user.social.facebook,
+    linkedin: user.social.linkedin,
+    github: user.social.github,
+    twitter: user.social.twitter,
   });
 
-  const { facebook, pinterest, github, twitter } = formData;
-
   useEffect(() => {
-    setFormData(user.social);
+    // setFormData(user.social);
   }, []);
 
   const onChange = (e) => {
@@ -48,7 +27,7 @@ const Profile = ({}) => {
       github: formData.github,
       facebook: formData.facebook,
       twitter: formData.twitter,
-      pinterest: formData.pinterest,
+      linkedin: formData.linkedin,
     };
     try {
       const config = {
@@ -81,21 +60,21 @@ const Profile = ({}) => {
               <MDBInput
                 className="social-text"
                 type="text"
-                placeholder={user.social.facebook}
                 name="facebook"
-                value={facebook}
+                placeholder="Facebook URL"
+                value={formData.facebook}
                 onChange={onChange}
               />
             </div>
 
             <div className="form-group social-input text-lg-left">
-              <i className="fab fa-pinterest fa-3x social" />
+              <i className="fab fa-linkedin fa-3x social" />
               <MDBInput
                 className="social-text"
                 type="text"
-                placeholder={user.social.pinterest}
-                name="pinterest"
-                value={pinterest}
+                name="linkedin"
+                placeholder="LinkedIn URL"
+                value={formData.linkedin}
                 onChange={onChange}
               />
             </div>
@@ -105,9 +84,9 @@ const Profile = ({}) => {
               <MDBInput
                 className="social-text"
                 type="text"
-                placeholder={user.social.github}
                 name="github"
-                value={github}
+                placeholder="Github URL"
+                value={formData.github}
                 onChange={onChange}
               />
             </div>
@@ -117,9 +96,9 @@ const Profile = ({}) => {
               <MDBInput
                 className="social-text"
                 type="text"
-                placeholder={user.social.twitter}
                 name="twitter"
-                value={twitter}
+                placeholder="Twitter URL"
+                value={formData.twitter}
                 onChange={onChange}
               />
             </div>
